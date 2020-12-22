@@ -1,7 +1,5 @@
 
-push 0
-
-push 11
+push
 
 pall
 

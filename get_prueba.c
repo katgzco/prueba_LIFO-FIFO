@@ -47,16 +47,18 @@ void divide_file(FILE *check_file, check *array, int *count_line)
 			array[idx].opcode = copy_string(token);
 			token = strtok(NULL, delim);
 			array[idx].arg = copy_string(token);
+			array[idx + 1].opcode = NULL;
+			array[idx + 1].arg = NULL;
 		}
 		if (array[idx].opcode != NULL)
 		{
-			opc_f(idx, false, array, &head, ln);
+			opc_f(idx, false, array, &head, ln, line);
 			idx++;
 		}
 	}
 	array[idx].opcode = NULL;
 	array[idx].arg = NULL;
-	opc_f(0, true, array, &head, ln);
+	opc_f(0, true, array, &head, ln, "");
 	free(line);
 	fclose(check_file);
 /*	opc_f(NULL, ln, true, array, &head, ln);
@@ -146,9 +148,10 @@ bool check_opcode(check *element, instruction_t *opc)
 	return (false);
 }
 
-void opc_f(int idx, bool exec, check *array, stack_t **s, positive ln)
+void opc_f(int idx, bool exec, check *array, stack_t **s, positive ln, char *l)
 {
 	int i = 0, j = 0;
+	char *msg = NULL;
 	instruction_t opc[] = {
 		{"push", push},
 		{"pall", pall},
@@ -161,8 +164,15 @@ void opc_f(int idx, bool exec, check *array, stack_t **s, positive ln)
 	{
 		if (check_opcode(&array[idx], opc) == false)
 		{
-			man_er(3, "L", _itoa(ln), ": unknown instruction ", array[idx].opcode);
-			//liberacion
+			msg = _itoa(ln);
+			man_er(3, "L", msg, ": unknown instruction ", array[idx].opcode);
+			free(msg);
+			free(l);
+			free_arr(array);
+			free_dlistint(*s);
+			/*
+			push
+			*/
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -183,6 +193,8 @@ void opc_f(int idx, bool exec, check *array, stack_t **s, positive ln)
 			}
 			i++;
 		}
+		free_arr(array);
+		free_dlistint(*s);
 	}
 }
 

@@ -50,7 +50,7 @@ typedef struct check
 void file_manage(char *file_name);
 void man_er(int size, const char *mesge, ...);
 char *copy_string(char *dest);
-void opc_f(int idx, bool exec, check *array, stack_t **s, positive ln);
+void opc_f(int idx, bool exec, check *array, stack_t **s, positive ln, char *l);
 void divide_file(FILE *check_file, check *array, int *count_line);
 void push(stack_t **stack, unsigned int ln);
 void pall(stack_t **stack, unsigned int ln);
