@@ -1,0 +1,4 @@
+
+
+/* Variable defined here */
+char *nodo_ini = NULL;

@@ -1,0 +1,34 @@
+	while ((check_get = getline(&line, &size, check_file)) != -1)
+	{
+
+
+		control = 0, ln++;
+		token = strtok(line, delim);
+		for (; token != NULL; i++)
+		{
+
+			if (control >= 2)
+			{
+				array[]
+				break;
+			}
+			control++;
+			array[i] = copy_string(token);
+			token = strtok(NULL, delim);
+		}
+		temp = i - 1;
+		if (control == 2)
+		{
+			temp--;
+			nodo_ini = array[temp + 1];
+			printf("prim asig %s\n", nodo_ini);
+		}
+
+
+	//(*opc_f(char *match, positive acm, bool exec, char **a))(stack_t **s, positive ln);
+	opc_f(array[temp], ln, false, array, &head, ln);
+	}
+	opc_f(NULL, ln, true, array, &head, ln);
+	array[i] = NULL;
+	*count_line = i;
+	free(line);
